@@ -144,9 +144,6 @@ export default {
     activeFilterCount() {
       return this.$store.getters[`${this.resourceName}/activeFilterCount`];
     },
-    value() {
-      return this.filters.currentValue;
-    },
 
     filterRows() {
       if (this.filters.length > 3) {

@@ -53,6 +53,18 @@ class NovaBigFilter extends Card
         ]);
     }
 
+	/**
+	 * Show button that toggles visibility of filters card
+	 *
+	 * @return $this
+	 */
+    public function showToggleButton()
+    {
+    	return $this->withMeta([
+		    'showToggleButton' => true
+	    ]);
+    }
+
     /**
      * Get the component name for the element.
      *

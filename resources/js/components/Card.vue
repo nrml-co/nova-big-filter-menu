@@ -14,7 +14,7 @@
       </button>
 
       <!-- Custom Filters -->
-      <div v-show="showFilters" v-for="filters in this.filterRows">
+      <div v-show="(card.showToggleButton && showFilters) || !card.showToggleButton" v-for="filters in this.filterRows">
         <div class="float-left nova-big-filter-col">
           <component
               v-if="filters[0]"
@@ -51,7 +51,7 @@
       </div>
 
       <!-- Soft Deletes -->
-      <div v-show="showFilters" v-if="softDeletes && showTrashedOption">
+      <div v-show="(card.showToggleButton && showFilters) || !card.showToggleButton" v-if="softDeletes && showTrashedOption">
         <h3 slot="default" class="text-sm uppercase tracking-wide text-80 bg-30 p-3">
           {{ __('Trashed') }}
         </h3>
@@ -71,7 +71,7 @@
         </div>
       </div>
 
-      <div v-show="showFilters" v-if="filtersAreApplied" class="bg-30 border-b border-60">
+      <div v-show="(card.showToggleButton && showFilters) || !card.showToggleButton" v-if="filtersAreApplied" class="bg-30 border-b border-60">
         <button
             @click="clearSelectedFilters"
             class="py-2 w-full block text-xs uppercase tracking-wide text-center text-80 dim font-bold focus:outline-none"

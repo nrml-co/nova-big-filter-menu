@@ -2,14 +2,16 @@
   <div v-if="filters.length > 0" class="bg-30 border-b border-60">
     <scroll-wrap :height="card.filterMaxHeight ? card.filterMaxHeight : 350">
       <div v-if="! card.filterHideTitle" class="py-2 w-full block text-xs uppercase tracking-wide text-center text-80 dim font-bold focus:outline-none">
-        {{this.card.filterMenuTitle ? this.card.filterMenuTitle : 'Filter Menu'}}
+        {{ this.card.filterMenuTitle ? this.card.filterMenuTitle : 'Filter Menu' }}
       </div>
       <button v-if="card.showToggleButton"
               @click="showFilters = !showFilters"
-              class="btn btn-default btn-primary">
+              class="btn btn-default btn-primary flex flex-col items-center justify-center ml-auto">
         <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-          <path fill="currentColor" d="m12 21c-5.196 0-9.815-3.067-11.767-7.814-.31-.753-.31-1.618 0-2.371 1.952-4.748 6.571-7.815 11.767-7.815s9.815 3.067 11.767 7.814c.31.753.31 1.618 0 2.371-1.952 4.748-6.571 7.815-11.767 7.815zm0-17c-4.789 0-9.045 2.824-10.842 7.194-.21.512-.21 1.099 0 1.611 1.797 4.371 6.053 7.195 10.842 7.195s9.045-2.824 10.842-7.194c.21-.512.21-1.099 0-1.611-1.797-4.371-6.053-7.195-10.842-7.195z"/>
-          <path fill="currentColor" d="m12 16c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4zm0-7c-1.654 0-3 1.346-3 3s1.346 3 3 3 3-1.346 3-3-1.346-3-3-3z"/>
+          <path fill="currentColor"
+                d="m12 21c-5.196 0-9.815-3.067-11.767-7.814-.31-.753-.31-1.618 0-2.371 1.952-4.748 6.571-7.815 11.767-7.815s9.815 3.067 11.767 7.814c.31.753.31 1.618 0 2.371-1.952 4.748-6.571 7.815-11.767 7.815zm0-17c-4.789 0-9.045 2.824-10.842 7.194-.21.512-.21 1.099 0 1.611 1.797 4.371 6.053 7.195 10.842 7.195s9.045-2.824 10.842-7.194c.21-.512.21-1.099 0-1.611-1.797-4.371-6.053-7.195-10.842-7.195z"/>
+          <path fill="currentColor"
+                d="m12 16c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4zm0-7c-1.654 0-3 1.346-3 3s1.346 3 3 3 3-1.346 3-3-1.346-3-3-3z"/>
         </svg>
       </button>
 
@@ -85,9 +87,10 @@
 </template>
 
 <script>
-import { Filterable, InteractsWithQueryString } from 'laravel-nova'
+import { Filterable, InteractsWithQueryString } from 'laravel-nova';
+
 export default {
-  mixins: [ Filterable, InteractsWithQueryString ],
+  mixins: [Filterable, InteractsWithQueryString],
   props: {
     card: {
       filterMenuTitle: String,
@@ -116,12 +119,12 @@ export default {
     },
   },
   methods: {
-    trashedChanged(event) {
-      this.$emit('trashed-changed', event.target.value)
+    trashedChanged (event) {
+      this.$emit('trashed-changed', event.target.value);
     },
 
-    perPageChanged(event) {
-      this.$emit('per-page-changed', event.target.value)
+    perPageChanged (event) {
+      this.$emit('per-page-changed', event.target.value);
     },
   },
 
@@ -129,42 +132,39 @@ export default {
     /**
      * Get the name of the page query string variable.
      */
-    pageParameter() {
+    pageParameter () {
       return this.viaRelationship
           ? this.viaRelationship + '_page'
-          : this.resourceName + '_page'
+          : this.resourceName + '_page';
     },
     /**
      * Return the filters from state
      */
-    filters() {
-      return this.$store.getters[`${this.resourceName}/filters`]
+    filters () {
+      return this.$store.getters[`${this.resourceName}/filters`];
     },
 
     /**
      * Determine via state whether filters are applied
      */
-    filtersAreApplied() {
-      return this.$store.getters[`${this.resourceName}/filtersAreApplied`]
+    filtersAreApplied () {
+      return this.$store.getters[`${this.resourceName}/filtersAreApplied`];
     },
 
     /**
      * Return the number of active filters
      */
-    activeFilterCount() {
-      return this.$store.getters[`${this.resourceName}/activeFilterCount`]
+    activeFilterCount () {
+      return this.$store.getters[`${this.resourceName}/activeFilterCount`];
     },
 
-    filterRows(){
-      if( this.filters.length > 3)
-      {
-        return _.chunk(this.filters, 3)
-      }
-      else
-      {
-        return [ this.filters ]
+    filterRows () {
+      if (this.filters.length > 3) {
+        return _.chunk(this.filters, 3);
+      } else {
+        return [this.filters];
       }
     }
   },
-}
+};
 </script>
